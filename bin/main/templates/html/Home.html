@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Zusma</title>
+        
+        <link rel = "stylesheet" href = "../css/lib/bootstrap.min.css">
+        <link rel = "stylesheet" href = "../css/lib/bootstrap-theme.min.css">
+        
+        <script src="../js/lib/jquery-3.5.1.min.js"></script>
+        <script src="../js/lib/bootstrap.min.js"></script>
+        <script src="../js/AppLoadAjax.js"></script>
+        
+        <script type="text/javascript">
+	        function refer(){
+	    		var ids = ['alert_restcallstatus','input_emailid','input_phonenumber'];
+	    		try{
+	    			var phonenumber = $('#input_phonenumber').val();
+	    			var emailid = $('#input_emailid').val();
+	    			var obj = {};
+	    			obj['phoneNumber'] = phonenumber;
+	    			obj['emailId'] = emailid;
+	    			doAjaxCallwithInputAndWithOutput('/zcr/refer/add','POST',obj,ids);
+	    		}catch(e){
+	    			alert ('error');
+	    			console.log('exception'+e);
+	    		}
+	    		
+	    	}   
+        </script>
+</head>
+<body>
+	
+<div class="container-fluid">
+		<br/><br/>
+  		<ul class="nav nav-tabs">
+  			<li class="active testingBackground"><a data-toggle="tab" href="#ponts"><strong class="red">Points</strong></a></li>
+			<li class="testingBackground"><a data-toggle="tab" href="#address"><strong class="red">Address</strong></a></li>
+			<li class="testingBackground"><a data-toggle="tab" href="#pickup"><strong class="gray">Pickup</strong></a></li>
+			<li class="testingBackground"><a data-toggle="tab" href="#refer"><strong class="olive">Refer</strong></a></li>
+		</ul>
+  		<div class="tab-content">
+			<div id="points" class="tab-pane fade in active">
+		
+			</div>
+			<div id="address" class="tab-pane fade">
+			</div>
+			<div id="pickup" class="tab-pane fade">
+			</div>
+			<div id="refer" class="tab-pane fade">
+				  <div class = "form-group" align="center">	                            
+				  	<div class = "col-sm-3 control-label">
+				       <input type = "text" class = "form-control focus_on_placing" id = "input_emailid" placeholder = "email id" />
+				       <br/>
+				       <input type = "text" class = "form-control focus_on_placing" id = "input_phonenumber" placeholder = "Phone number*" />
+				       <br/>
+				       <button type="button" class="btn btn-default" onclick="refer();">refer</button>
+				       <br/>
+				    </div>
+				  </div>
+				
+			</div>
+		</div>
+</div>
+</body>
+</html>

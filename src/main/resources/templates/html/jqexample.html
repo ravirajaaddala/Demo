@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Hello jQuery</title>
+        
+        <link rel = "stylesheet" href = "../css/lib/bootstrap.min.css">
+        <link rel = "stylesheet" href = "../css/lib/bootstrap-theme.min.css">
+        
+        <script src="../js/lib/jquery-3.5.1.min.js"></script>
+        <script src="../js/lib/bootstrap.min.js"></script>
+        <script src="../js/AppLoadAjax.js"></script>
+        <script type="text/javascript">
+        	function fetchData(){
+        		alert ('calling');
+        		var ids = ['alert_restcallstatus','input_fcontent','input_fid'];
+        		try{
+        			
+        			doAjaxCallWithoutInputAndWithOutput('/zcr/gfetch','GET',ids);
+        		//	$('#label_restrequestsubmitFlag').text('');
+        		}catch(e){
+        			alert ('error');
+        			console.log('exception'+e);
+        		}
+        		
+        	}
+        	function adoAjaxCallWithoutInputAndWithOutput(resturl,method,id){
+        		$.ajax({
+        			type: method,
+        			url: resturl,
+        			contentType: "application/json;charset=utf-8",
+        	        dataType: "json",
+        			success: function(data){
+        				
+        			},
+        	        error: function(e){
+        	        	console.log(e.responseText);
+        	        }
+        		}).then(function(data){
+        			console.log(data);
+        			processOutput(data,id);
+        			
+        			/* var ele = document.getElementById(id);
+        			 ele.setAttribute("ajaxResponse", data);
+        			 response = JSON.parse(data);
+        			 console.log(response);
+        			 console.log(data);*/
+        		});
+        	}
+        </script>
+    </head>
+
+    <body>
+        <div class="container-fluid p-3 my-3 bg-dark text-white">
+            <p class="">The new new ID is </p>
+            <input type="text" id="input_fid">
+            <p class="greeting-content">The content is </p>
+            <input type="text" id="input_fcontent"><br/>
+            <input type="button" name="fetch" onclick="fetchData()" value ="fetch"> 
+        </div>
+    </body>
+</html>

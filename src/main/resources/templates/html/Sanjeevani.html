@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Zusma</title>
+        
+        <link rel = "stylesheet" href = "../css/lib/bootstrap.min.css">
+        <link rel = "stylesheet" href = "../css/lib/bootstrap-theme.min.css">
+        
+        <script src="../js/lib/jquery-3.5.1.min.js"></script>
+        <script src="../js/lib/bootstrap.min.js"></script>
+        <script src="../js/AppLoadAjax.js"></script>
+        
+        <script type="text/javascript">
+	        function registerUpdate(){
+	    		var ids = ['alert_restcallstatus'];
+	    		try{
+	    			var category = $('#dropdownmap_sanjeevaniCategory').val();
+	    			var bloodgroup = $('#dropdownmap_sanjeevaniBloodgroup').val();
+	    			var pincode = $('#input_sanjeevaniPincode').val();
+	    			var place = $('#input_sanjeevaniPlace').val();
+	    			var userId = $('#input_userId').val();
+	    			
+	    			var obj = {};
+	    			obj['category'] = category;
+	    			obj['bloodgroup'] = bloodgroup;
+	    			obj['pincode'] = pincode;
+	    			obj['place'] = place;
+	    			obj['userId'] = userId;
+	    			alert(bloodgroup);
+	    			doAjaxCallwithInputAndWithOutput('/zcr/sanjeevani/register','POST',obj,ids);
+	    		}catch(e){
+	    			alert ('error');
+	    			console.log('exception'+e);
+	    		}
+	    		
+	    	}   
+        </script>
+</head>
+<body>
+	
+<div class="container-fluid">
+		<br/><br/>
+  		<ul class="nav nav-tabs">
+  		    <li class="active testingBackground"><a data-toggle="tab" href="#appointment"><strong class="red">Book Appointment</strong></a></li>
+  		    <li class="testingBackground"><a data-toggle="tab" href="#healthhistory"><strong class="gray">Health History</strong></a></li>
+			<li class="testingBackground"><a data-toggle="tab" href="#register"><strong class="red">Donor Registration</strong></a></li>
+			<li class="testingBackground"><a data-toggle="tab" href="#donationhistory"><strong class="gray">Donation History</strong></a></li>
+		</ul>
+  		<div class="tab-content">
+  			<div id="appointment" class="tab-pane fade in active">
+  				<input class="form-control" id="input_userId" type="text" name="userId">
+				<br/>
+				<div class = "form-group" align="center">	                            
+				  	<div class = "input-group">
+					      	  <span class = "input-group-addon">Pincode  :</span>
+						       <input class="form-control" id="input_appointmentPincode" type="text" name="pin code">
+					      </div>
+				  </div>
+				  <br/>
+				  <div class = "form-group" align="center">	                            
+				  	<div class = "input-group">
+					      	  <span class = "input-group-addon">Village/Town/City  :</span>
+						       <input class="form-control" id="input_appointmentPlace" type="text" name="place">
+					      </div>
+				  </div>
+				  <br/>
+				  <button type = "button"  class = "btn btn-info btn-block"
+	 									onclick="searchHospital();">Search Hospital</button>
+	 			  <br/>
+	 			  <div class = "form-group" align="center">	                            
+				  	<div class = "input-group">
+					      	  <span class = "input-group-addon">Hospital  :</span>
+						      <select class="form-control" id="dropdownmap_appointmentHospital">
+										<option value="SELECT" >---Select---</option>
+						      </select>
+					      </div>
+				  </div>
+				  <br/>
+				  <div class = "form-group" align="center">	                            
+				  	<div class = "input-group">
+					      	  <span class = "input-group-addon">Problem  :</span>
+						      <select class="form-control" id="dropdownmap_appointmentHospital">
+										<option value="SELECT" >---Select---</option>
+						      </select>
+					      </div>
+				  </div>
+				  <br/>
+				  <div class = "form-group" align="center">	                            
+				  	<div class = "input-group">
+					      	  <span class = "input-group-addon">Available Timings  :</span>
+						      <select class="form-control" id="dropdownmap_appointmentTimings">
+										<option value="SELECT" >---Select---</option>
+						      </select>
+					      </div>
+				  </div>
+				   <br/>
+				  <div class = "form-group" align="center">	                            
+				  	<div class = "input-group">
+					      	  <span class = "input-group-addon">Name  :</span>
+					      	  <input class="form-control" id="input_appointmentName" type="text" name="name">
+					      </div>
+				  </div>
+				  <br/>
+				  <div class = "form-group" align="center">	                            
+				  	<div class = "input-group">
+					      	  <span class = "input-group-addon">Phone number  :</span>
+					      	  <input class="form-control" id="input_appointmentPhonenumber" type="text" name="phone number">
+					      </div>
+				  </div>
+				  <br/>
+				  
+				  <button type = "button"  class = "btn btn-info btn-block"
+	 									onclick="scheduleAppointment();">Book</button>
+			</div>
+			<div id="healthhistory" class="tab-pane fade">
+			</div>
+			<div id="register" class="tab-pane fade">
+				<br/>
+				<br/>
+				<div class = "form-group" align="center">	                            
+				  	<div class = "input-group">
+					      	  <span class = "input-group-addon">Category  :</span>
+						      <select class="form-control" id="dropdownmap_sanjeevaniCategory">
+										<option value="blood">Blood</option>
+										<option value="plasma">Plasma</option>
+						      </select>
+					      </div>
+				  </div>
+				  <br/>
+				  <div class = "form-group" align="center">	                            
+				  	<div class = "input-group">
+					      	  <span class = "input-group-addon">Blood group  :</span>
+						      <select class="form-control" id="dropdownmap_sanjeevaniBloodgroup">
+										<option value="Apositive">A+</option>
+										<option value="Anegative">A-</option>
+										<option value="Bpositive">B+</option>
+										<option value="Bnegative">B-</option>
+										<option value="Opositive">O+</option>
+										<option value="Onegative">O-</option>
+										<option value="ABpositive">AB+</option>
+										<option value="ABnegative">AB-</option>
+						      </select>
+					      </div>
+				  </div>
+				   <br/>
+				  <div class = "form-group" align="center">	                            
+				  	<div class = "input-group">
+					      	  <span class = "input-group-addon">Pincode  :</span>
+						       <input class="form-control" id="input_sanjeevaniPincode" type="text" name="pin code">
+					      </div>
+				  </div>
+				  <br/>
+				  <div class = "form-group" align="center">	                            
+				  	<div class = "input-group">
+					      	  <span class = "input-group-addon">Village/Town/City  :</span>
+						       <input class="form-control" id="input_sanjeevaniPlace" type="text" name="place">
+					      </div>
+				  </div>
+				  <br/>
+				  <button type = "button"  class = "btn btn-info btn-block"
+	 									onclick="registerUpdate();">Update</button>
+			</div>
+			<div id="donationhistory" class="tab-pane fade">
+			</div>
+		</div>
+</div>
+</body>
+</html>
